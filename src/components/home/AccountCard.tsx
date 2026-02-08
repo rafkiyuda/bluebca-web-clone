@@ -47,10 +47,16 @@ export function AccountCard() {
 
                 {/* Actions */}
                 <div className="flex gap-4">
-                    <button className="bg-gray-200/80 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-2xl flex-1 text-sm transition-colors">
+                    <button
+                        onClick={() => alert("Fitur Pindah Dana belum tersedia")}
+                        className="bg-gray-200/80 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-2xl flex-1 text-sm transition-colors active:scale-95"
+                    >
                         Pindah Dana
                     </button>
-                    <button className="bg-gray-200/80 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-2xl flex-1 text-sm transition-colors">
+                    <button
+                        onClick={() => alert("Fitur QRIS belum tersedia")}
+                        className="bg-gray-200/80 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-2xl flex-1 text-sm transition-colors active:scale-95"
+                    >
                         QRIS
                     </button>
                     <div className="w-12 flex items-center justify-center">
