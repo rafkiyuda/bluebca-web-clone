@@ -1,9 +1,17 @@
 "use client";
 
-import { Calendar, Search, Scroll, ArrowUpCircle, ArrowDownCircle } from "lucide-react"; // Using available icons
+import { Calendar, Search, Scroll, ArrowUpCircle, ArrowDownCircle, Coffee, ShoppingBag, Car, Zap, ArrowDownLeft, ArrowUpRight } from "lucide-react";
 import { TrackerChart } from "@/components/tracker/TrackerChart";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+
+const dummyTransactions = [
+    { id: 1, title: "Kopi Kenangan", category: "Makanan & Minuman", date: "27 Feb", amount: -25000, icon: Coffee, color: "bg-orange-100 text-orange-500" },
+    { id: 2, title: "Gojek Indonesia", category: "Transportasi", date: "26 Feb", amount: -45000, icon: Car, color: "bg-blue-100 text-blue-500" },
+    { id: 3, title: "Transfer dari Budi", category: "Transfer Masuk", date: "25 Feb", amount: 500000, icon: ArrowDownLeft, color: "bg-green-100 text-green-500" },
+    { id: 4, title: "Indomaret", category: "Belanja", date: "24 Feb", amount: -150000, icon: ShoppingBag, color: "bg-yellow-100 text-yellow-500" },
+    { id: 5, title: "Token Listrik", category: "Tagihan", date: "22 Feb", amount: -100000, icon: Zap, color: "bg-purple-100 text-purple-500" },
+];
 
 export default function TrackerPage() {
     const [activeTab, setActiveTab] = useState<"cashflow" | "pengeluaran" | "pemasukan">("cashflow");
@@ -46,22 +54,8 @@ export default function TrackerPage() {
                         activeTab === "pengeluaran" ? "text-blue-700 bg-blue-50" : "text-gray-400"
                     )}
                 >
-                    <div className={cn("rounded-full", activeTab === "pengeluaran" ? "text-blue-600" : "text-gray-300")}>
-                        <ArrowUpCircle size={20} className="transform rotate-180" />
-                        {/* Down arrow usually implies expense (out/down) but user image has Up arrow for Pemasukan and Down(ish) for Pengeluaran? 
-                            Wait, user image:
-                            Cashflow: Icon
-                            Pengeluaran: Arrow UP (Icon with Up Arrow)
-                            Pemasukan: Arrow DOWN (Icon with Down Arrow)
-                            Actually standard logic: Expense = Money Out (Red/Orange), Income = Money In (Green).
-                            Let's follow the user image strictly if possible. 
-                            Image 1: Cashflow is active.
-                            Image 2: Pengeluaran active. Icon is Up Arrow in circle. 
-                            Image 3: Pemasukan active. Icon is Down Arrow in circle.
-                         */}
-                        <div className={cn("p-1 rounded-full", activeTab === "pengeluaran" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-400")}>
-                            <ArrowUpCircle size={14} fill="white" className={activeTab === "pengeluaran" ? "text-white" : "text-gray-400"} />
-                        </div>
+                    <div className={cn("p-1 rounded-full", activeTab === "pengeluaran" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-400")}>
+                        <ArrowUpCircle size={14} fill="white" className={activeTab === "pengeluaran" ? "text-white" : "text-gray-400"} />
                     </div>
                     Pengeluaran
                 </button>
@@ -86,23 +80,36 @@ export default function TrackerPage() {
             <div className="bg-blu-gray/50 h-2 w-screen -mx-6 my-8"></div>
 
             {/* Transaction List */}
-            <div className="mb-4">
-                <h2 className="font-bold text-gray-800">Februari 2026</h2>
+            <div className="mb-4 flex items-center justify-between">
+                <h2 className="font-bold text-gray-800">Riwayat Transaksi</h2>
+                <button className="text-blu-blue text-sm font-semibold">Lihat Semua</button>
             </div>
 
-            <div className="flex flex-col items-center justify-center mt-8 gap-4">
-                <div className="relative">
-                    <div className="w-16 h-16 bg-cyan-400 rounded-full opacity-20"></div>
-                    <Search size={32} className="text-blu-blue absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-                </div>
-                <p className="text-center text-gray-400 text-sm max-w-[200px]">
-                    {activeTab === "pemasukan"
-                        ? "Tidak ada pemasukan di bulan Februari 2026"
-                        : activeTab === "pengeluaran"
-                            ? "Tidak ada pengeluaran di bulan Februari 2026"
-                            : "Kamu belum pernah bertransaksi di bulan Februari ini"
-                    }
-                </p>
+            <div className="flex flex-col gap-4">
+                {dummyTransactions.map((trx) => (
+                    <div key={trx.id} className="flex items-center justify-between border-b border-gray-50 pb-4 last:border-0 hover:bg-gray-50 transition-colors rounded-xl p-2 cursor-pointer">
+                        <div className="flex items-center gap-3">
+                            <div className={cn("w-10 h-10 rounded-full flex items-center justify-center", trx.color)}>
+                                <trx.icon size={20} />
+                            </div>
+                            <div>
+                                <p className="font-bold text-gray-800 text-sm">{trx.title}</p>
+                                <div className="flex items-center gap-2 text-xs text-gray-500">
+                                    <span>{trx.category}</span>
+                                    <span>•</span>
+                                    <span>{trx.date}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p className={cn(
+                            "font-bold text-sm",
+                            trx.amount > 0 ? "text-emerald-500" : "text-gray-800"
+                        )}>
+                            {trx.amount > 0 ? "+" : ""}
+                            {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(trx.amount)}
+                        </p>
+                    </div>
+                ))}
             </div>
         </main>
     );

@@ -2,6 +2,7 @@ import { AccountCard } from "@/components/home/AccountCard";
 import { FavoriteTransactions } from "@/components/home/FavoriteTransactions";
 import { ProfileHeader } from "@/components/home/ProfileHeader";
 import { PromoSection } from "@/components/home/PromoSection";
+import { PromoBanner } from "@/components/home/PromoBanner";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <AccountCard />
       <PromoSection />
       <FavoriteTransactions />
+      <PromoBanner />
     </main>
   );
 }
