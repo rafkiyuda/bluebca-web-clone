@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "Clone of BLU BCA mobile app",
 };
 
+import { BluWiseWidget } from "@/components/home/BluWiseWidget";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -24,6 +26,7 @@ export default function RootLayout({
           <Header />
           {children}
           <BottomNav />
+          <BluWiseWidget />
         </MobileLayout>
       </body>
     </html>
