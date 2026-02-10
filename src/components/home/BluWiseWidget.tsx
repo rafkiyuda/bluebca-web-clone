@@ -9,7 +9,7 @@ export function BluWiseWidget() {
 
     return (
         <>
-            <div className="fixed bottom-24 right-4 z-40 animate-bounce-slow cursor-pointer group" onClick={() => setIsOpen(true)}>
+            <div className="fixed bottom-24 right-4 z-[100] animate-bounce-slow cursor-pointer group pointer-events-auto" onClick={() => setIsOpen(true)}>
                 <div className="bg-white p-3 rounded-full shadow-xl border-2 border-blue-100 relative group-hover:scale-110 transition-transform duration-300">
                     <span className="text-3xl">🦉</span>
                     <div className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm animate-pulse">
