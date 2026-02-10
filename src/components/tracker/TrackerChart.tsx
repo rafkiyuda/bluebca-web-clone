@@ -65,7 +65,7 @@ export function TrackerChart({ view }: TrackerChartProps) {
                                 }}
                             />
                             <Tooltip
-                                formatter={(value: number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(value)}
+                                formatter={(value: number | undefined) => value !== undefined ? new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(value) : ''}
                                 contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
                             />
                             <Area
@@ -132,7 +132,7 @@ export function TrackerChart({ view }: TrackerChartProps) {
                             ))}
                         </Pie>
                         <Tooltip
-                            formatter={(value: number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(value)}
+                            formatter={(value: number | undefined) => value !== undefined ? new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(value) : ''}
                         />
                         <Legend verticalAlign="bottom" height={36} iconType="circle" />
                     </PieChart>
