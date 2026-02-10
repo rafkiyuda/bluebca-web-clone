@@ -1,3 +1,5 @@
+"use client";
+
 import { Bell, Headset, Star } from "lucide-react";
 
 export function ProfileHeader() {
@@ -15,7 +17,10 @@ export function ProfileHeader() {
                 </div>
             </div>
             <div className="flex gap-4">
-                <button className="p-2 rounded-full hover:bg-gray-100 relative">
+                <button
+                    onClick={() => alert("Fitur Chat haloblu akan segera hadir!")}
+                    className="p-2 rounded-full hover:bg-gray-100 relative"
+                >
                     <Headset size={24} className="text-gray-600" />
                 </button>
                 <button className="p-2 rounded-full hover:bg-gray-100 relative">

@@ -1,13 +1,22 @@
+"use client";
+
 import { Plus } from "lucide-react";
+import { useState } from "react";
+import { AddFavoriteModal } from "../modals/AddFavoriteModal";
 
 export function FavoriteTransactions() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return (
         <div className="w-full mt-8 mb-24">
             <h2 className="font-bold text-gray-500 mb-4 text-sm tracking-wide">TRANSAKSI FAVORIT</h2>
 
             <div className="flex gap-4 items-center">
                 {/* Add New Button */}
-                <button className="flex flex-col items-center gap-2 group">
+                <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="flex flex-col items-center gap-2 group"
+                >
                     <div className="w-14 h-14 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-300 group-hover:border-blu-primary group-hover:text-blu-primary transition-colors">
                         <Plus size={24} />
                     </div>
@@ -20,6 +29,8 @@ export function FavoriteTransactions() {
                     <p className="text-gray-300 text-sm">Transaksi Favorit</p>
                 </div>
             </div>
+
+            <AddFavoriteModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </div>
     );
 }
