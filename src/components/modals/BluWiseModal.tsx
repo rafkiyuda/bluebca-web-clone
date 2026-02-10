@@ -15,7 +15,7 @@ export function BluWiseModal({ isOpen, onClose }: BluWiseModalProps) {
     const [step, setStep] = useState<Step>("WELCOME");
     const [balance, setBalance] = useState(20000);
     const [slotResult, setSlotResult] = useState<string[]>(["?", "?", "?"]);
-    const [is spinning, setIsSpinning] = useState(false);
+    const [isSpinning, setIsSpinning] = useState(false);
     const [riskProfile, setRiskProfile] = useState<"Conservative" | "Moderate" | "Aggressive">("Moderate");
 
     // Reset state when modal opens
@@ -196,8 +196,8 @@ export function BluWiseModal({ isOpen, onClose }: BluWiseModalProps) {
                                         key={r}
                                         onClick={() => setRiskProfile(r)}
                                         className={`p-2 rounded-xl border-2 text-xs font-bold transition-all ${riskProfile === r
-                                                ? "border-blu-blue bg-blue-50 text-blu-blue"
-                                                : "border-gray-100 text-gray-400 hover:border-blue-100"
+                                            ? "border-blu-blue bg-blue-50 text-blu-blue"
+                                            : "border-gray-100 text-gray-400 hover:border-blue-100"
                                             }`}
                                     >
                                         {r}
