@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Trophy, TrendingUp, AlertTriangle, Coins, ArrowRight, RefreshCcw, Banknote, Shield, Zap } from "lucide-react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { X, Trophy, TrendingUp, AlertTriangle, Coins, ArrowRight, RefreshCcw, Banknote, Shield, Zap, Sparkles } from "lucide-react";
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 
 interface BluWiseModalProps {
     isOpen: boolean;
@@ -312,6 +312,13 @@ export function BluWiseModal({ isOpen, onClose }: BluWiseModalProps) {
                         </div>
                     </div>
                 );
+            default:
+                return (
+                    <div className="text-center p-10">
+                        <p className="text-red-500">Error: Unknown step {step}</p>
+                        <button onClick={() => setStep("WELCOME")} className="bg-blu-blue text-white px-4 py-2 rounded mt-4">Reset</button>
+                    </div>
+                );
         }
     };
 
@@ -325,6 +332,4 @@ export function BluWiseModal({ isOpen, onClose }: BluWiseModalProps) {
     );
 }
 
-// Add these missing imports to the top of the file if they are not present
-import { PieChart, Pie, Cell } from "recharts";
-import { Sparkles } from "lucide-react";
+
