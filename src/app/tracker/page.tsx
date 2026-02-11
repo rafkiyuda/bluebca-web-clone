@@ -1,10 +1,11 @@
 "use client";
 
-import { Calendar, Search, Scroll, ArrowUpCircle, ArrowDownCircle, Coffee, ShoppingBag, Car, Zap, ArrowDownLeft, ArrowUpRight, Target } from "lucide-react";
+import { Calendar, Search, Scroll, ArrowUpCircle, ArrowDownCircle, Coffee, ShoppingBag, Car, Zap, ArrowDownLeft, ArrowUpRight, Target, Clock } from "lucide-react";
 import { TrackerChart } from "@/components/tracker/TrackerChart";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { TargetModal } from "@/components/modals/TargetModal";
+import { GoalHistoryModal } from "@/components/modals/GoalHistoryModal";
 
 const dummyTransactions = [
     { id: 1, title: "Kopi Kenangan", category: "Makanan & Minuman", date: "27 Feb", amount: -25000, icon: Coffee, color: "bg-orange-100 text-orange-500" },
@@ -17,20 +18,30 @@ const dummyTransactions = [
 export default function TrackerPage() {
     const [activeTab, setActiveTab] = useState<"cashflow" | "pengeluaran" | "pemasukan">("cashflow");
     const [isTargetModalOpen, setIsTargetModalOpen] = useState(false);
+    const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
 
     return (
         <main className="flex min-h-screen flex-col p-6 pt-32 pb-32 relative bg-white">
             <div className="flex items-center justify-between mb-6">
                 <h1 className="text-2xl font-bold text-gray-800">Tracker</h1>
-                <button
-                    onClick={() => setIsTargetModalOpen(true)}
-                    className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors text-gray-600"
-                >
-                    <Target size={20} />
-                </button>
+                <div className="flex gap-2">
+                    <button
+                        onClick={() => setIsHistoryModalOpen(true)}
+                        className="p-2 bg-blue-50 rounded-full hover:bg-blue-100 transition-colors text-blu-blue"
+                    >
+                        <Clock size={20} />
+                    </button>
+                    <button
+                        onClick={() => setIsTargetModalOpen(true)}
+                        className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors text-gray-600"
+                    >
+                        <Target size={20} />
+                    </button>
+                </div>
             </div>
 
             <TargetModal isOpen={isTargetModalOpen} onClose={() => setIsTargetModalOpen(false)} />
+            <GoalHistoryModal isOpen={isHistoryModalOpen} onClose={() => setIsHistoryModalOpen(false)} />
 
             {/* Top Tabs (Mutasi / Analisis) */}
             <div className="flex gap-6 mb-6 border-b border-gray-200">

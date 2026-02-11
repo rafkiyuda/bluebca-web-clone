@@ -9,9 +9,14 @@ import Image from "next/image";
 interface TargetModalProps {
     isOpen: boolean;
     onClose: () => void;
+    initialData?: {
+        targetName: string;
+        amount: number;
+        advice: string;
+    };
 }
 
-export function TargetModal({ isOpen, onClose }: TargetModalProps) {
+export function TargetModal({ isOpen, onClose, initialData }: TargetModalProps) {
     const [isClosing, setIsClosing] = useState(false);
     const [targetName, setTargetName] = useState("");
     const [amount, setAmount] = useState("");
@@ -21,12 +26,19 @@ export function TargetModal({ isOpen, onClose }: TargetModalProps) {
     useEffect(() => {
         if (isOpen) {
             setIsClosing(false);
-            setTargetName("");
-            setAmount("");
-            setAdvice(null);
             setIsLoading(false);
+
+            if (initialData) {
+                setTargetName(initialData.targetName);
+                setAmount(initialData.amount.toString());
+                setAdvice(initialData.advice);
+            } else {
+                setTargetName("");
+                setAmount("");
+                setAdvice(null);
+            }
         }
-    }, [isOpen]);
+    }, [isOpen, initialData]);
 
     const handleClose = () => {
         setIsClosing(true);
@@ -45,6 +57,19 @@ export function TargetModal({ isOpen, onClose }: TargetModalProps) {
         try {
             const result = await generateFinancialAdvice(targetName, Number(amount));
             setAdvice(result);
+
+            // Save to LocalStorage
+            const saved = localStorage.getItem("blu-goals");
+            const history = saved ? JSON.parse(saved) : [];
+            const newGoal = {
+                id: Date.now().toString(),
+                targetName,
+                amount: Number(amount),
+                advice: result,
+                createdAt: Date.now()
+            };
+            localStorage.setItem("blu-goals", JSON.stringify([...history, newGoal]));
+
         } catch (error) {
             alert("Gagal mendapatkan saran. Coba lagi.");
         } finally {
@@ -125,7 +150,7 @@ export function TargetModal({ isOpen, onClose }: TargetModalProps) {
                                 <span className="text-xl">👩🏻‍💼</span>
                             </div>
 
-                            <div className="bg-blue-50 rounded-2xl p-4 rounded-tl-none text-sm text-gray-700 leading-relaxed max-h-[300px] overflow-y-auto">
+                            <div className="bg-blue-50 rounded-2xl p-4 rounded-tl-none text-sm text-gray-700 leading-relaxed max-h-[300px] overflow-y-auto scrollbar-hide">
                                 <p className="whitespace-pre-line">{advice}</p>
                             </div>
                         </div>
