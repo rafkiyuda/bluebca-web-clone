@@ -316,7 +316,7 @@ export function BluWiseModal({ isOpen, onClose }: BluWiseModalProps) {
     };
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onClick={onClose} />
             <div className="bg-white rounded-[2.5rem] w-full max-w-[360px] min-h-[600px] max-h-[90vh] overflow-y-auto p-6 relative z-10 shadow-3xl flex flex-col no-scrollbar">
                 {renderContent()}
