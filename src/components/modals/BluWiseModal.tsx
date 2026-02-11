@@ -69,7 +69,75 @@ export function BluWiseModal({ isOpen, onClose }: BluWiseModalProps) {
 
     const renderContent = () => {
         switch (step) {
-            // ... (keep previous cases SAME)
+            case "WELCOME":
+                return (
+                    <div className="text-center space-y-6 animate-fade-in">
+                        <div className="bg-blue-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span className="text-4xl">🤖</span>
+                        </div>
+                        <h2 className="text-2xl font-bold text-blu-blue">Halo Morgan,</h2>
+                        <p className="text-gray-600">
+                            Selamat! Kamu bisa mendapatkan<br />
+                            <span className="text-2xl font-bold text-emerald-500">Rp 1.000.000,00</span>
+                        </p>
+                        <div className="relative h-44 w-full bg-blue-100 rounded-2xl overflow-hidden flex items-center justify-center">
+                            <Coins className="w-24 h-24 text-blue-300 animate-bounce" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-blue-200/50 to-transparent"></div>
+                            {/* Decorative coins falling */}
+                            <div className="absolute top-0 left-1/4 animate-bounce delay-75 text-yellow-500">💰</div>
+                            <div className="absolute top-4 right-1/4 animate-bounce delay-150 text-yellow-500">💰</div>
+                        </div>
+                        <button
+                            onClick={() => setStep("CHOICE")}
+                            className="w-full bg-white text-blu-blue font-bold py-4 rounded-full shadow-lg border-2 border-blu-blue hover:bg-blue-50 transition-all active:scale-95"
+                        >
+                            Dapatkan Dana
+                        </button>
+                    </div>
+                );
+
+            case "CHOICE":
+                return (
+                    <div className="text-center space-y-6 animate-fade-in">
+                        <div className="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <span className="text-3xl">🤔</span>
+                        </div>
+                        <div>
+                            <h2 className="text-xl font-bold text-gray-800">#bluWISE</h2>
+                            <p className="text-sm text-gray-500">Halo Morgan, Silakan pilih cara untuk mendapatkan dana itu!</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-4 mt-4">
+                            <button
+                                onClick={() => setStep("GAMBLING")}
+                                className="bg-white border-2 border-red-100 p-4 rounded-2xl hover:bg-red-50 transition-all group text-left relative overflow-hidden flex items-center gap-4 shadow-sm"
+                            >
+                                <div className="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center text-2xl flex-shrink-0">🎰</div>
+                                <div>
+                                    <h3 className="font-bold text-red-600 text-lg">Gambling</h3>
+                                    <p className="text-xs text-gray-500">Silakan coba peruntunganmu!</p>
+                                </div>
+                            </button>
+
+                            <button
+                                onClick={() => setStep("INVESTMENT_INPUT")}
+                                className="bg-white border-2 border-emerald-100 p-4 rounded-2xl hover:bg-emerald-50 transition-all group text-left relative overflow-hidden flex items-center gap-4 shadow-sm"
+                            >
+                                <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center text-2xl flex-shrink-0">🌱</div>
+                                <div>
+                                    <h3 className="font-bold text-emerald-600 text-lg">Investasikan</h3>
+                                    <p className="text-xs text-gray-500">Simulasi dan perencanaan investasi</p>
+                                </div>
+                            </button>
+                        </div>
+
+                        <div className="bg-blue-50 p-3 rounded-xl mt-4">
+                            <p className="text-[10px] text-blu-blue">
+                                "Pilih dengan bijaksana ya Morgan! Jangan sampai kuncinya untung malah buntung."
+                            </p>
+                        </div>
+                    </div>
+                );
 
             case "GAMBLING":
                 const isJackpot = slotResult.every(val => val === "7");
